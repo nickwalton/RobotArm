@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import String
+import numpy as np
 
-#Don't forget to make the node executable chmod +x Subscriber.py
-l
+a = np.array([])
+
 def callback(data):
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+	print data
+	
+	np.append(a,data)
+	
+	print "a is " 
+	print a
+		
+	np.savetxt("data.csv",a, delimiter = " ", fmt='%10.5f')
 	
 def listener():
 
