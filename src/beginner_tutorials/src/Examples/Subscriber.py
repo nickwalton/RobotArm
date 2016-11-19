@@ -3,7 +3,7 @@ import rospy
 from std_msgs.msg import String
 
 #Don't forget to make the node executable chmod +x Subscriber.py
-l
+
 def callback(data):
 	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
 	
