@@ -1,0 +1,8 @@
+prefix=/home/nickwalton00/git/ros_ws/devel
+
+Name: rosserial_server
+Description: Description of rosserial_server
+Version: 0.7.4
+Cflags: -I/home/nickwalton00/git/ros_ws/src/rosserial/rosserial_server/include
+Libs: -L/home/nickwalton00/git/ros_ws/devel/lib 
+Requires: roscpp rosserial_msgs topic_tools
