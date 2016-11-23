@@ -13,8 +13,14 @@
  */
  
  /*
-   To begin publishing run this command:
+   
+   To Control Arm:
+   Upload Code
    rosrun rosserial_python serial_node.py /dev/ttyACM0
+   rosrun keyboard keyboard
+   rosrun robot_arm arm_command.py
+   
+   Then use wasd hujk sapce and shift to control arm
    
  
  */
@@ -54,11 +60,11 @@ void servo_cb4( const std_msgs::UInt16& cmd_msg){
 }
 
 
-ros::Subscriber<std_msgs::UInt16> sub0("servo", servo_cb0);
-ros::Subscriber<std_msgs::UInt16> sub1("servo", servo_cb1);
-ros::Subscriber<std_msgs::UInt16> sub2("servo", servo_cb2);
-ros::Subscriber<std_msgs::UInt16> sub3("servo", servo_cb3);
-ros::Subscriber<std_msgs::UInt16> sub4("servo", servo_cb4);
+ros::Subscriber<std_msgs::UInt16> sub0("servo0", servo_cb0);
+ros::Subscriber<std_msgs::UInt16> sub1("servo1", servo_cb1);
+ros::Subscriber<std_msgs::UInt16> sub2("servo2", servo_cb2);
+ros::Subscriber<std_msgs::UInt16> sub3("servo3k", servo_cb3);
+ros::Subscriber<std_msgs::UInt16> sub4("servo4", servo_cb4);
 
 void setup(){
   nh.initNode();
