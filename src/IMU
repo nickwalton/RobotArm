@@ -1,0 +1,125 @@
+#!/usr/bin/env python
+import rospy
+import numpy as np
+import ast
+from sensor_msgs.msg import Imu
+from geometry_msgs.msg import Vector3Stamped
+import scipy.io as sio
+import tf.transformations as tr
+import time
+
+#Subscribes to Raw data of IMU's 
+class ImuSubscribe():
+
+	#Initialize IMU Subscribe class
+	def __init__(self, imu_num):
+	
+		self.imu_data = {'Time':[],'LinearX':[], 'LinearY':[], 'LinearZ':[], 'AngularX':[], 'AngularY':[], 'AngularZ':[], 'MagX':[], 'MagY':[], 'MagZ':[], 'OrientationX':[], 'OrientationY':[], 'OrientationZ':[], 'OrientationW':[],'EulerX':[], 'EulerY':[],'EulerZ':[]}
+		
+		self.motion_capture = {'Time':[], 'OrientationX':[], 'OrientationY':[], 'OrientationZ':[], 'OrientationW':[],'EulerX':[], 'EulerY':[],'EulerZ':[]}
+		
+		self.imu_num = imu_num
+		
+		self.nominal_matrix_transpose = np.array([[]])
+		self.nominal_matrix_set = False
+    self.motion_nominal_matrix_transpose = np.array([[]])
+		self.nominal_matrix_set = False
+
+	#Callback function for accerlation and and angular velocity.
+	def callback1(self, msg):
+	
+		self.imu_data['Time'].append(str(msg.header.stamp))
+		
+		self.imu_data['LinearX'].append(msg.linear_acceleration.x)
+		self.imu_data['LinearY'].append(msg.linear_acceleration.y)
+		self.imu_data['LinearZ'].append(msg.linear_acceleration.z)
+		
+		self.imu_data['AngularX'].append(msg.angular_velocity.x)
+		self.imu_data['AngularY'].append(msg.angular_velocity.y)
+		self.imu_data['AngularZ'].append(msg.angular_velocity.z)
+		
+	#Callback function for Mag Sensor
+	def callback2(self,msg):
+	
+		self.imu_data['MagX'].append(msg.vector.x)
+		self.imu_data['MagY'].append(msg.vector.y)
+		self.imu_data['MagZ'].append(msg.vector.z)
+	
+	#Callback function for magic filter
+	def callback3(self,msg):
+    self.imu_data['Time'].append(int(msg.header.stamp))
+		quaternion = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]
+		
+		rotation_matrix = tr.quaternion_matrix(quaternion)
+		
+		# Set first matrix as nominal matrix
+		if self.nominal_matrix_set == False:
+			nump_matrix = np.array(rotation_matrix)
+			self.nominal_matrix_transpose = nump_matrix.transpose()
+			self.nominal_matrix_set = True
+		else:
+			rotation_from_nominal = np.dot(rotation_matrix, self.nominal_matrix_transpose)
+			new_quaternion = tr.quaternion_from_matrix(rotation_from_nominal)
+			
+			#Save new quaternion data to file
+			self.imu_data['OrientationX'].append(new_quaternion[0])
+			self.imu_data['OrientationY'].append(new_quaternion[1])
+			self.imu_data['OrientationZ'].append(new_quaternion[2])
+			self.imu_data['OrientationW'].append(new_quaternion[3])	
+		
+	#Callback function for motion capture.
+	def callback4(self, msg):
+  self.motion_capture['Time'].append(int(msg.header.stamp))
+	
+  quaternion = [msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w]
+		
+		rotation_matrix = tr.quaternion_matrix(quaternion)
+		
+		# Set first matrix as nominal matrix
+		if self.motion_nominal_matrix_set == False:
+			nump_matrix = np.array(rotation_matrix)
+			self.motion_nominal_matrix_transpose = nump_matrix.transpose()
+			self.motoin_nominal_matrix_set = True
+		else:
+			rotation_from_nominal = np.dot(rotation_matrix, self.motion_nominal_matrix_transpose)
+			new_quaternion = tr.quaternion_from_matrix(rotation_from_nominal)
+			
+			#Save new quaternion data to file
+			self.motion_capture['OrientationX'].append(new_quaternion[0])
+			self.motion_capture['OrientationY'].append(new_quaternion[1])
+			self.motion_capture['OrientationZ'].append(new_quaternion[2])
+			self.motion_capture['OrientationW'].append(new_quaternion[3])	
+		
+	
+	#Sets up Rospy Listener
+	def listener(self):
+
+		rospy.init_node('listener', anonymous=True) 
+		
+		#Set up subscriber for imu data
+		rospy.Subscriber("/imu_Ada_" + str(self.imu_num) + "/data_raw", Imu, self.callback1)
+		
+		#Set up subscriber for mag data
+		rospy.Subscriber("/imu_Ada_" + str(self.imu_num) + "/mag", Vector3Stamped, self.callback2)
+		
+		#Set up subscriber for orientation data
+		rospy.Subscriber("/imu_Ada_" + str(self.imu_num) + "/data", Imu, self.callback3)
+		
+		#Set up subscriber for motion capture data
+		rospy.Subscriber("/imuboard/imuboard", PoseStamped, self.callback4)
+	
+		#spin() simply keeps python from exiting until this node is stopped. 
+		rospy.spin() 
+	
+if __name__ == '__main__':
+
+		IMU0 = ImuSubscribe(0)
+	
+		while not rospy.is_shutdown():	
+			IMU0.listener()
+			
+	#Save data to a matlab file
+	sio.savemat('IMU0data.mat', IMU0.imu_data)
+	sio.savemat('MotionCapture.mat', IMU0.motion_capture)
+		
+	print("\n Saved Data to .mat files")
