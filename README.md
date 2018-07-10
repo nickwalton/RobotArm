@@ -13,7 +13,7 @@ Summer of 2016 I decided I wanted to make a robot arm that could flip grilled ch
 
 At the time I was a Mechanical Engineering Major and Computer Science Minor so I started at the basic physics level to figure out the necessary dimensions of my robot arm.
 
-I made a cardboard prototype to figure out the range of motions that would be needed, and from there developed a simple 4 DOF robot arm model. After developing the model I analyzed the stresses and torques that would be present at each joint and on each arm to figure out the necessary thickness of each arm. The basic calculation can be seen here.
+I made a cardboard prototype to figure out the range of motions that would be needed, and from there developed a simple 4 DOF robot arm model. After developing the model I analyzed the stresses and torques that would be present at each joint and on each arm to figure out the necessary thickness of each arm. The basic calculation can be seen [here](./RobotArmCalculations.pdf).
 
 ### From there I modeled the arm with the calculated dimensions in solidworks.
 
