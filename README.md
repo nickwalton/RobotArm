@@ -1,5 +1,9 @@
+[//]: # (Image References)
+
 [image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
 [image2]: ./AssembledRobotArm.JPG "Assembled Arm"
+
+---
 
 # Robot Arm Code
 
