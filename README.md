@@ -10,11 +10,11 @@ I made a cardboard prototype to figure out the range of motions that would be ne
 
 From there I modeled the arm with the calculated dimensions in solidworks.
 
-[image1]: ./ModeledRobotArm.png "Modeled Robot Arm"
+[image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
 
 I 3D printed my model, assembled and wired it with Servos I had purchased. 
 
-[image1]: ./AssembledRobotArm.png "Assembled Arm"
+[image1]: ./AssembledRobotArm.JPG "Assembled Arm"
 
 At a hackathon I took my assembled arm and used ROS and an arduino to be able to control each of my joints in real time with my laptop keys.
 
