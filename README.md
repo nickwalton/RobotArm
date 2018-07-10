@@ -10,7 +10,7 @@ I made a cardboard prototype to figure out the range of motions that would be ne
 
 From there I modeled the arm with the calculated dimensions in solidworks.
 
-[image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
+![image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
 
 I 3D printed my model, assembled and wired it with Servos I had purchased. 
 
