@@ -2,8 +2,8 @@
 
 [//]: # (Image References)
 
-[image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
-[image2]: ./AssembledRobotArm.JPG "Assembled Arm"
+[image1]: ./ModeledRobotArm.JPG "Modeled Robot Arm"
+[image2]: ./AssembledRobotArm.jpg "Assembled Arm"
 
 ---
 
