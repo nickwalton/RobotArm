@@ -9,7 +9,7 @@
 ## Design
 I've always loved doing little robotics projects. When I was younger I would go to thrift stores and find old electric toys, take them apart and frankenstein them into some new robotics contraption.
 
-Summer of 2016 I decided I wanted to do make a robot arm that could flip grilled cheese sandwiches, because delicious.
+Summer of 2016 I decided I wanted to make a robot arm that could flip grilled cheese sandwiches, because delicious.
 
 At the time I was a Mechanical Engineering Major and Computer Science Minor so I started at the basic physics level to figure out the necessary dimensions of my robot arm.
 
