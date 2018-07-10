@@ -1,3 +1,6 @@
+[image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
+[image2]: ./AssembledRobotArm.JPG "Assembled Arm"
+
 # Robot Arm Code
 
 I've always loved doing little robotics projects. When I was younger I would go to thrift stores and find old electric toys, take them apart and frankenstein them into some new robotics contraption.
@@ -10,11 +13,11 @@ I made a cardboard prototype to figure out the range of motions that would be ne
 
 From there I modeled the arm with the calculated dimensions in solidworks.
 
-![image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
+![alt text][image1]
 
 I 3D printed my model, assembled and wired it with Servos I had purchased. 
 
-[image2]: ./AssembledRobotArm.JPG "Assembled Arm"
+![alt text][image2]
 
 At a hackathon I took my assembled arm and used ROS and an arduino to be able to control each of my joints in real time with my laptop keys.
 
