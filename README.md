@@ -1,11 +1,11 @@
+# **Robot Arm**
+
 [//]: # (Image References)
 
 [image1]: ./ModeledRobotArm.jpg "Modeled Robot Arm"
-[image2]: ./AssembledRobotArm.JPG "Assembled Arm"
+[image2]: ./AssembledRobotArm.jpg "Assembled Arm"
 
 ---
-
-# Robot Arm Code
 
 I've always loved doing little robotics projects. When I was younger I would go to thrift stores and find old electric toys, take them apart and frankenstein them into some new robotics contraption.
 
